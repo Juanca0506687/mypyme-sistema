@@ -1,0 +1,7 @@
+tkinter
+Pillow
+reportlab
+sqlite3
+datetime
+os
+shutil

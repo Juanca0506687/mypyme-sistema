@@ -1,0 +1,7 @@
+[tool.replit]
+language = "python3"
+run = "python main.py"
+
+[tool.replit.packages]
+buildozer = "*"
+cython = "*"
