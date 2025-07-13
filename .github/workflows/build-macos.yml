@@ -5,13 +5,15 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: macos-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -26,10 +28,16 @@ jobs:
     
     - name: Build executable
       run: |
-        pyinstaller --onefile --windowed --name "MYPYME" main.py
+        pyinstaller MYPYME_Sistema.spec
+    
+    - name: Create ZIP archive
+      run: |
+        cd dist
+        zip -r MYPYME_macOS.zip MYPYME
+        cd ..
     
     - name: Upload executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: mypyme-macos
-        path: dist/ 
+        name: MYPYME-macOS
+        path: dist/MYPYME_macOS.zip 
